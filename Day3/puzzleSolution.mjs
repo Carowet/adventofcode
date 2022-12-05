@@ -26,5 +26,25 @@ function part1() {
   console.log(result.reduce((a, b) => a + b, 0))
 }
 
+function part2() {
+  let sum = 0;
+  for (let i = 0; i < lines.length; i += 3) {
+    const backpacks = [[...lines[i]], [...lines[i + 1]], [...lines[i + 2]]];
+
+    let set = new Set(backpacks[0]);
+    let intersection = backpacks[1].filter((x) => set.has(x));
+
+    set = new Set(intersection);
+    intersection = backpacks[2].filter((x) => set.has(x));
+
+    const dedup = [...new Set(intersection)];
+
+    sum += letterToPriority(dedup[0]);
+  }
+  console.log(sum)
+
+}
+
 
 part1();
+part2();
