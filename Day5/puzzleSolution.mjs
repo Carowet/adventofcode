@@ -53,4 +53,21 @@ function part1() {
   );
 }
 
+function part2() {
+  const localStacks = JSON.parse(JSON.stringify(stacks));
+  for (const move of moves) {
+    const crates = localStacks[move.from].splice(-move.count, move.count);
+    localStacks[move.to] = localStacks[move.to].concat(crates);
+  }
+  console.log(
+    indexes
+      .map((value) => {
+        const stack = localStacks[value];
+        return stack[stack.length - 1];
+      })
+      .join("")
+  );
+}
+
 part1();
+part2();
